@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+	<config>
+		<acl>
+			<resources>
+				<admin>
+					<children>
+						<system>
+							<children>
+								<config>
+									<children>
+										<export translate="title" module="pswidget">
+											<title>Product Export Section</title>
+											<sort_order>0</sort_order>
+										</export>
+                                        <tracking translate="title" module="pswidget">
+                                            <title>Order Tracking Section</title>
+                                            <sort_order>0</sort_order>
+                                        </tracking>
+									</children>
+								</config>
+							</children>
+						</system>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+	</config>

@@ -1,0 +1,158 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Photoslurp_PsWidget>
+      <version>1.0.23</version>
+    </Photoslurp_PsWidget>
+  </modules>
+    <default>
+        <tracking>
+            <tracking_configuration>
+                <tracking_enable>1</tracking_enable>
+            </tracking_configuration>
+        </tracking>
+		<export>
+			<export_configuration>
+				<cron_enable>1</cron_enable>
+			</export_configuration>
+		</export>
+    </default>
+  <frontend>
+    <routers>
+      <pswidget>
+        <use>standard</use>
+          <args>
+            <module>Photoslurp_PsWidget</module>
+            <frontName>pswidget</frontName>
+          </args>
+      </pswidget>
+    </routers>
+		<layout>
+		  <updates>
+			<pswidget>
+			  <file>pswidget.xml</file>
+			</pswidget>
+		  </updates>
+		</layout>
+  </frontend>
+  <global>
+    <helpers>
+      <pswidget>
+        <class>Photoslurp_PsWidget_Helper</class>
+      </pswidget>
+    </helpers>
+	<blocks>
+	  <pswidget>
+		<class>Photoslurp_PsWidget_Block</class>
+	  </pswidget>
+	</blocks>
+	<models>
+	  <pswidget>
+		<class>Photoslurp_PsWidget_Model</class>
+		<resourceModel>pswidget_mysql4</resourceModel>
+	  </pswidget>
+	  <pswidget_mysql4>
+		<class>Photoslurp_PsWidget_Model_Mysql4</class>
+		<entities>		  
+			  <pswidget>
+				<table>photoslurp_widget</table>
+			  </pswidget>
+            <pswidgetlang>
+                <table>photoslurp_widget_lang</table>
+            </pswidgetlang>
+        </entities>
+	  </pswidget_mysql4>
+	</models>
+	<resources>
+	  <pswidget_setup>
+		<setup>
+		  <module>Photoslurp_PsWidget</module>
+		</setup>
+		<connection>
+		  <use>core_setup</use>
+		</connection>
+	  </pswidget_setup>
+	  <pswidget_write>
+		<connection>
+		  <use>core_write</use>
+		</connection>
+	  </pswidget_write>
+	  <pswidget_read>
+		<connection>
+		  <use>core_read</use>
+		</connection>
+	  </pswidget_read>
+	</resources>
+  </global>
+  <admin>
+	<routers>
+	  <adminhtml>
+				<args>
+					<modules>
+						<pswidget before="Mage_Adminhtml">Photoslurp_PsWidget_Adminhtml</pswidget>
+					</modules>
+				</args>
+			</adminhtml>
+	</routers>
+  </admin>
+  <adminhtml>
+	<menu>
+	  <pswidget module="pswidget">
+		<title>Photoslurp</title>
+		<sort_order>90</sort_order>
+		<children>
+		  <pswidget module="pswidget">
+		    <title>Manage Widgets</title>
+			<sort_order>0</sort_order>
+			<action>adminhtml/pswidget_pswidget</action>
+		  </pswidget>
+            <pswidgetbackend module="pswidget">
+                <title>Export Products</title>
+                <sort_order>1</sort_order>
+                <action>adminhtml/pswidget_pswidgetbackend</action>
+            </pswidgetbackend>
+		</children>
+	  </pswidget>
+	</menu>
+	<acl>
+	  <resources>
+		<all>
+		  <title>Allow Everything</title>
+		</all>
+		<admin>
+		  <children>
+			<pswidget translate="title" module="pswidget">
+			  <title>Photoslurp Widget</title>
+			  <sort_order>1000</sort_order>
+			  <children>
+				  <pswidget translate="title">
+					<title>Manage Widgets</title>
+					<sort_order>0</sort_order>
+				  </pswidget>
+				  <pswidgetbackend translate="title">
+					  <title>Export</title>
+					  <sort_order>0</sort_order>
+				  </pswidgetbackend>
+			  </children>
+			</pswidget>
+		  </children>
+		</admin>
+	  </resources>
+	</acl>
+	<layout>
+	  <updates>
+		<pswidget>
+		  <file>pswidget.xml</file>
+		</pswidget>
+	  </updates>
+	</layout>
+  </adminhtml>
+    <crontab>
+        <jobs>
+            <pswidget_photoslurpexport>
+                <schedule><cron_expr>0 2 * * *</cron_expr></schedule>
+                <run><model>pswidget/cron::photoslurpExport</model></run>
+            </pswidget_photoslurpexport>
+        </jobs>
+    </crontab>
+</config> 

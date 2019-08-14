@@ -1,0 +1,26 @@
+<?php $helper = Mage::helper('pswidget'); ?>
+
+<div class="content-header">
+    <h3 class="icon-head head-adminhtml-pswidget">Photoslurp Product Export</h3>
+</div>
+
+<div>
+    <form method="get" action="<?php echo Mage::helper("adminhtml")->getUrl("adminhtml/pswidget_pswidgetbackend/export/") ?>">
+        <input type="hidden" name="product_type" value="<?php echo Mage::getStoreConfig('export/export_configuration/export_type') ?>">
+        <p><button type="submit"><?php echo Mage::helper('adminhtml')->__('Export products')?></button></p>
+        <?php if (file_exists($helper->getExportedFileName())):?>
+            <p>
+                <?php $link = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB).str_replace(Mage::getBaseDir('base').'/','',$helper->getExportedFileName()) ?>
+                <?php echo Mage::helper('adminhtml')->__('Access link:')?>
+                <a href="<?php echo $link ?>" download><?php echo $link ?></a>
+            </p>
+        <?php endif; ?>
+        <p><a href="<?php echo Mage::helper("adminhtml")->getUrl("adminhtml/system_config/edit/section/export")?>"> <?php echo $this->__('Settings') ?></a></p>
+    </form>
+</div>
+
+
+
+
+
+

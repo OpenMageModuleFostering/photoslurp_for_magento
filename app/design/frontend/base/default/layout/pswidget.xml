@@ -1,0 +1,52 @@
+<?xml version="1.0"?>   
+<layout version="0.1.0">
+
+    <default>
+        <reference name="head">
+            <block type="pswidget/widget" template="pswidget/style.phtml"/>
+        </reference>
+    </default>
+
+    <catalog_product_view>
+
+        <reference name="after_body_start" >
+            <block type="pswidget/widget"  template="pswidget/widget.phtml" name="pswidget.product.page.top">
+                <action method="setData"><name>page_type</name><value>product</value></action>
+                <action method="setData"><name>position</name><value>product-page-top</value></action>
+            </block>
+        </reference>
+        <reference name="before_body_end" >
+            <block type="pswidget/widget"  template="pswidget/widget.phtml" name="pswidget.product.page.bottom">
+                <action method="setData"><name>page_type</name><value>product</value></action>
+                <action method="setData"><name>position</name><value>product-page-bottom</value></action>
+            </block>
+        </reference>
+        <reference name="content">
+            <block type="pswidget/widget"  template="pswidget/widget.phtml" name="pswidget.product.content.top" before="-">
+                <action method="setData"><name>page_type</name><value>product</value></action>
+                <action method="setData"><name>position</name><value>product-content-top</value></action>
+            </block>
+        </reference>
+        <reference name="content">
+            <block type="pswidget/widget"  template="pswidget/widget.phtml" name="pswidget.product.content.bottom" after="-">
+                <action method="setData"><name>page_type</name><value>product</value></action>
+                <action method="setData"><name>position</name><value>product-content-bottom</value></action>
+            </block>
+        </reference>
+        <reference name="product.info.media.after">
+            <block type="pswidget/widget"  template="pswidget/widget.phtml" name="pswidget.product.media">
+                <action method="setData"><name>page_type</name><value>product</value></action>
+                <action method="setData"><name>position</name><value>product-media</value></action>
+            </block>
+        </reference>
+
+    </catalog_product_view>
+
+    <checkout_onepage_success>
+        <reference name="before_body_end">
+            <block name="photoslurp_tracking" template="pswidget/tracking.phtml" type="core/template" />
+        </reference>
+    </checkout_onepage_success>
+
+</layout>   
+	

@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+
+      <adminhtml_pswidget_pswidget_index>
+        <reference name="content">
+          <block type="pswidget/adminhtml_pswidget" name="pswidget" />
+        </reference>
+      </adminhtml_pswidget_pswidget_index>
+
+    <adminhtml_pswidget_pswidget_edit>
+        <reference name="head">
+            <action method="addJs"><script>photoslurp/admin.js</script></action>
+        </reference>
+    </adminhtml_pswidget_pswidget_edit>
+
+    <adminhtml_pswidget_pswidget_new>
+        <reference name="head">
+            <action method="addJs"><script>photoslurp/admin.js</script></action>
+        </reference>
+    </adminhtml_pswidget_pswidget_new>
+
+    <adminhtml_pswidget_pswidgetbackend_index>
+        <reference name="content">
+            <block type="adminhtml/template" name="pswidgetbackend" template="pswidget/pswidgetbackend.phtml"/>
+            <!--<block type="pswidget/adminhtml_pswidgetbackend" name="pswidgetbackend" template="pswidget/pswidgetbackend.phtml"/>-->
+        </reference>
+    </adminhtml_pswidget_pswidgetbackend_index>
+
+</layout>
