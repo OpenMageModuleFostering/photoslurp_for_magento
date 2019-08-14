@@ -151,7 +151,9 @@
 ?>
 				showSubmit:      <?php echo ($_show_submit)?'true':'false' ?>,
 				submitText:     '<?php echo addslashes($_submit_text) ?>',
+<?php if($_shop_this_look_text): ?>
 				shopThisLookText:'<?php echo addslashes($_shop_this_look_text) ?>',
+<?php endif; ?>
 				autoscrollLimit: <?php echo $_autoscroll_limit ?>,
 				page_limit:      <?php echo $_page_limit ?>,
 				pageType:       '<?php echo $_page_type ?>',

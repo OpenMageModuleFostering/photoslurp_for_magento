@@ -117,15 +117,32 @@ class Photoslurp_PsWidget_Model_Cron{
         return $stores;
     }
 
+    private function joinAttribute($collection, $name, $type, $storeId ){
+        $attributeId = Mage::getResourceModel('eav/entity_attribute')->getIdByCode('catalog_product', $name);
+        $collection->getSelect()->joinLeft(array('at_'.$name.'_'.$storeId => Mage::getSingleton('core/resource')->getTableName('catalog_product_entity_'.$type)),
+            '(`at_'.$name.'_'.$storeId.'`.`entity_id` = `e`.`entity_id`) AND (`at_'.$name.'_'.$storeId.'`.`attribute_id` = '.$attributeId.') AND `at_'.$name.'_'.$storeId.'`.`store_id` = '.$storeId,
+            array($name.'_'.$storeId => 'IF(at_'.$name.'_'.$storeId.'.value_id > 0, at_'.$name.'_'.$storeId.'.value, at_'.$name.'_default.value)'));
+    }
+
+    private function joinDefaults($collection, $name, $type){
+        $attributeId = Mage::getResourceModel('eav/entity_attribute')->getIdByCode('catalog_product', $name);
+        $collection->getSelect()->joinLeft(array('at_'.$name.'_default' => Mage::getSingleton('core/resource')->getTableName('catalog_product_entity_'.$type)),
+            '(`at_'.$name.'_default`.`entity_id` = `e`.`entity_id`) AND (`at_'.$name.'_default`.`attribute_id` = '.$attributeId.') AND `at_'.$name.'_default`.`store_id` = 0',
+            array('at_'.$name.'_default' => 'value'));
+    }
+
     private function addProductStoreData($collection){
 
-        $stores = $this->getExportStores();
+        $this->joinDefaults($collection,'name','varchar');
+        $this->joinDefaults($collection,'description','text');
+        $this->joinDefaults($collection,'url_key','varchar');
 
+        $stores = $this->getExportStores();
         foreach ($stores as $store){
             $storeId = $store->getId();
-            $collection->joinAttribute('name_'.$storeId, 'catalog_product/name', 'entity_id', null, 'left',$storeId);
-            $collection->joinAttribute('description_'.$storeId, 'catalog_product/description', 'entity_id', null, 'left',$storeId);
-            $collection->joinAttribute('url_key_'.$storeId, 'catalog_product/url_key', 'entity_id', null, 'left',$storeId);
+            $this->joinAttribute($collection,'name','varchar',$storeId);
+            $this->joinAttribute($collection,'description','text',$storeId);
+            $this->joinAttribute($collection,'url_key','varchar',$storeId);
         }
     }
 

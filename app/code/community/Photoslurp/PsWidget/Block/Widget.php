@@ -57,12 +57,7 @@ class Photoslurp_PsWidget_Block_Widget extends Mage_Core_Block_Template{
         foreach($cssBlocks[0] as $cssBlock) {
             $cssBlock = trim($cssBlock);
             preg_match('/[^{}]*{/', $cssBlock, $selector);
-            if(!preg_match('/^@/', $selector[0])) {
-                $selectorModified = preg_replace(array('/,/', '/^/'), array(",\n#$id ", "\n#$id "), $selector[0]);
-                $cssBlockModified = preg_replace("/$selector[0]/", $selectorModified, $cssBlock);
-            }else{
-                $cssBlockModified = "\n$cssBlock";
-            }
+            $cssBlockModified = "\n$cssBlock";
             $cssModified .= $cssBlockModified;
         }
         return $cssModified;

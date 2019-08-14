@@ -2,7 +2,7 @@
 <config>
   <modules>
     <Photoslurp_PsWidget>
-      <version>1.0.26</version>
+      <version>1.0.28</version>
     </Photoslurp_PsWidget>
   </modules>
     <default>
