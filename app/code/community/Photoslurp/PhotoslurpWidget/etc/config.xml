@@ -1,0 +1,139 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Photoslurp_PhotoslurpWidget>
+      <version>0.1.0</version>
+    </Photoslurp_PhotoslurpWidget>
+  </modules>
+  <frontend>
+    <routers>
+      <photoslurpwidget>
+        <use>standard</use>
+          <args>
+            <module>Photoslurp_PhotoslurpWidget</module>
+            <frontName>photoslurpwidget</frontName>
+          </args>
+      </photoslurpwidget>
+    </routers>
+		<layout>
+		  <updates>
+			<photoslurpwidget>
+			  <file>photoslurpwidget.xml</file>
+			</photoslurpwidget>
+		  </updates>
+		</layout>
+  </frontend>
+  <global>
+    <helpers>
+      <photoslurpwidget>
+        <class>Photoslurp_PhotoslurpWidget_Helper</class>
+      </photoslurpwidget>
+    </helpers>
+	<blocks>
+	  <photoslurpwidget>
+		<class>Photoslurp_PhotoslurpWidget_Block</class>
+	  </photoslurpwidget>
+	</blocks>
+	<models>
+	  <photoslurpwidget>
+		<class>Photoslurp_PhotoslurpWidget_Model</class>
+		<resourceModel>photoslurpwidget_mysql4</resourceModel>
+	  </photoslurpwidget>
+	  <photoslurpwidget_mysql4>
+		<class>Photoslurp_PhotoslurpWidget_Model_Mysql4</class>
+		<entities>		  
+			  <photoslurpwidget>
+				<table>photoslurp_widget</table>
+			  </photoslurpwidget>
+        </entities>
+	  </photoslurpwidget_mysql4>
+	</models>
+	<resources>
+	  <photoslurpwidget_setup>
+		<setup>
+		  <module>Photoslurp_PhotoslurpWidget</module>
+		</setup>
+		<connection>
+		  <use>core_setup</use>
+		</connection>
+	  </photoslurpwidget_setup>
+	  <photoslurpwidget_write>
+		<connection>
+		  <use>core_write</use>
+		</connection>
+	  </photoslurpwidget_write>
+	  <photoslurpwidget_read>
+		<connection>
+		  <use>core_read</use>
+		</connection>
+	  </photoslurpwidget_read>
+	</resources>
+  </global>
+  <admin>
+	<routers>
+	  <photoslurpwidget>
+	    <use>admin</use>
+		<args>
+		  <module>Photoslurp_PhotoslurpWidget</module>
+		  <frontName>admin_photoslurpwidget</frontName>
+		</args>
+	  </photoslurpwidget>
+	</routers>
+  </admin>
+  <adminhtml>
+	<menu>
+	  <photoslurpwidget module="photoslurpwidget">
+		<title>Photoslurp</title>
+		<sort_order>90</sort_order>
+		<children>
+		  <photoslurpwidget module="photoslurpwidget">
+		    <title>Manage Widgets</title>
+			<sort_order>0</sort_order>
+			<action>admin_photoslurpwidget/adminhtml_photoslurpwidget</action>
+		  </photoslurpwidget>
+            <photoslurpwidgetbackend module="photoslurpwidget">
+                <title>Export Products</title>
+                <sort_order>1</sort_order>
+                <action>admin_photoslurpwidget/adminhtml_photoslurpwidgetbackend</action>
+            </photoslurpwidgetbackend>
+		</children>
+	  </photoslurpwidget>
+	</menu>
+	<acl>
+	  <resources>
+		<all>
+		  <title>Allow Everything</title>
+		</all>
+		<admin>
+		  <children>
+			<photoslurpwidget translate="title" module="photoslurpwidget">
+			  <title>Photoslurp Widget</title>
+			  <sort_order>1000</sort_order>
+			  <children>
+		  <photoslurpwidget translate="title">
+			<title>Manage Widgets</title>
+			<sort_order>0</sort_order>
+		  </photoslurpwidget>
+			  </children>
+			</photoslurpwidget>
+		  </children>
+		</admin>
+	  </resources>
+	</acl>
+	<layout>
+	  <updates>
+		<photoslurpwidget>
+		  <file>photoslurpwidget.xml</file>
+		</photoslurpwidget>
+	  </updates>
+	</layout>
+  </adminhtml>
+    <crontab>
+        <jobs>
+            <photoslurpwidget_photoslurpexport>
+                <schedule><cron_expr>0 2 * * *</cron_expr></schedule>
+                <run><model>photoslurpwidget/cron::photoslurpExport</model></run>
+            </photoslurpwidget_photoslurpexport>
+        </jobs>
+    </crontab>
+</config> 

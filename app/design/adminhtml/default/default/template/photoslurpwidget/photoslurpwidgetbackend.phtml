@@ -1,0 +1,24 @@
+<?php $helper = Mage::helper('photoslurpwidget'); ?>
+
+<div class="content-header">
+    <h3 class="icon-head head-adminhtml-photoslurpwidget">Photoslurp Product Export</h3>
+</div>
+
+<div>
+    <form method="get" action="<?php echo Mage::helper("adminhtml")->getUrl("photoslurpwidget/adminhtml_photoslurpwidgetbackend/export/") ?>">
+        <button type="submit"><?php echo Mage::helper('adminhtml')->__('Export products')?></button>
+    </form>
+</div>
+
+<br>
+
+<?php if (file_exists($helper->getFileName())):?>
+    <p>
+        <?php echo Mage::helper('adminhtml')->__('Access link:')?>
+        <a href="<?php echo Mage::helper('adminhtml')->__('%s%s', Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB),$helper->getFileName())?>" download><?php echo Mage::helper('adminhtml')->__('%s%s', Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB),$helper->getFileName())?></a>
+    </p>
+<?php endif; ?>
+
+
+
+

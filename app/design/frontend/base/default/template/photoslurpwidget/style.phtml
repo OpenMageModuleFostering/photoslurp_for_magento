@@ -1,0 +1,13 @@
+<?php
+    $_product = $this->getProduct();
+    $_widgets = $this->getAllWidgets();
+?>
+
+<?php foreach($_widgets as $widget):?>
+    <?php if($widget->getStyleCustomEnable()): ?>
+        <style type="text/css" data-photoslurp-css-id="<?php echo $widget->getWidgetContainerId(); ?>">
+            <?php echo $this->prepareStyleText($widget->getStyleCustom(),$widget->getWidgetContainerId()) ; ?>
+        </style>
+    <?php endif; ?>
+<?php endforeach; ?>
+

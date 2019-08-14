@@ -1,0 +1,16 @@
+{
+    "name": "OpenMageModuleFostering/photoslurp_for_magento",
+    "type": "magento-module",
+    "license": "OSL-v3",
+    "homepage": "",
+    "description": "A visual commerce and marketing platform that helps brands increase conversion rates by finding, curating, analysing and publishing customer photos from Instagram, Twitter and Facebook",
+    "authors": [
+    {
+        "name": "Ben Heinkel",
+        "email": "ben@photoslurp.com"
+    }
+],
+    "suggest": {
+        "magento-hackathon/magento-composer-installer": "*"
+    }
+}

@@ -1,0 +1,188 @@
+<?php
+
+$_product = $this->getProduct();
+
+if ($this->getData('type') == 'product') {
+    $_widget = $this->getProductPageWidget();
+} else {
+    $_widget = $this->getWidget();
+}
+
+?>
+
+<?php if($_widget->getId()):
+
+    $_widget_container_id       =   $_widget->getWidgetContainerId();
+    $_widget_type               =   Photoslurp_PhotoslurpWidget_Block_Adminhtml_Photoslurpwidget_Grid::getValueArray5()[$_widget->getWidgetType()]['label'];
+    $_album_id                  =   $_widget -> getAlbumId();
+    $_lang                      =   Mage::app()->getStore()->getCode();//$_widget -> getLang();
+    $_widget_id                 =   $_widget -> getWidgetId();
+    $_image_height              =   $_widget -> getImageHeight();
+    $_image_width               =   $_widget -> getImageWidth();
+    $_show_submit               =   $_widget -> getShowSubmit();
+    $_submit_text               =   $_widget -> getSubmitText();
+    $_page_limit                =   $_widget -> getPageLimit();
+    $_page_type                 =   Photoslurp_PhotoslurpWidget_Block_Adminhtml_Photoslurpwidget_Grid::getValueArray10()[$_widget -> getPageType()]['label'];
+    $_product_id                =   ($_product)?$_product->getSku():'';
+    $_add_photos_img            =   $_widget -> getAddPhotosImg();
+    $_social_icons              =   $_widget -> getSocialIcons();
+    $_note_add_pics_text        =   $_widget -> getNoteAddPicsText();
+    $_note_add_pics_icons_arr   =   explode(",", $_widget->getNoteAddPicsIcons());
+
+    $_facebook                  =   ($this->getIsFacebookIconEnabled())?'true':'false';
+    $_twitter                   =   ($this->getIsTwitterIconEnabled())?'true':'false';
+    $_instagram                 =   ($this->getIsInstagramIconEnabled())?'true':'false';
+
+//STYLE PARAMETERS
+
+    $_style_submissionform_colourtop        =   $_widget->getData('style_submissionform_colourtop');
+    $_style_submissionform_colourbutton     =   $_widget->getData('style_submissionform_colourbutton');
+    $_style_submissionform_font             =   $_widget->getData('style_submissionform_font');
+
+    $_style_taggingtitle_font_family        =   $_widget->getData('style_taggingtitle_font_family');
+    $_style_taggingtitle_font_style         =   $_widget->getData('style_taggingtitle_font_style');
+    $_style_taggingtitle_font_weight        =   $_widget->getData('style_taggingtitle_font_weight');
+    $_style_taggingtitle_font_color         =   $_widget->getData('style_taggingtitle_font_color');
+    $_style_taggingtitle_font_size          =   $_widget->getData('style_taggingtitle_font_size');
+
+    $_style_thumbnail_bg_color              =   $_widget->getData('style_thumbnail_bg_color');
+    $_style_thumbnail_border_color          =   $_widget->getData('style_thumbnail_border_color');
+
+    $_style_carousel_bg_color               =   $_widget->getData('style_carousel_bg_color');
+
+    $_style_popup_bg_color                  =   $_widget->getData('style_popup_bg_color');
+    $_style_popup_title_font_family         =   $_widget->getData('style_popup_title_font_family');
+    $_style_popup_title_font_style          =   $_widget->getData('style_popup_title_font_style');
+    $_style_popup_title_font_weight         =   $_widget->getData('style_popup_title_font_weight');
+    $_style_popup_title_font_color          =   $_widget->getData('style_popup_title_font_color');
+
+    $_style_source_font_family              =   $_widget->getData('style_source_font_family');
+    $_style_source_font_style               =   $_widget->getData('style_source_font_style');
+    $_style_source_font_weight              =   $_widget->getData('style_source_font_weight');
+    $_style_source_font_color               =   $_widget->getData('style_source_font_color');
+
+    $_style_productcaptionshop_font_family  =   $_widget->getData('style_productcaptionshop_font_family');
+    $_style_productcaptionshop_font_style   =   $_widget->getData('style_productcaptionshop_font_style');
+    $_style_productcaptionshop_font_weight  =   $_widget->getData('style_productcaptionshop_font_weight');
+    $_style_productcaptionshop_font_color   =   $_widget->getData('style_productcaptionshop_font_color');
+
+    $_style_productdescription_font_family  =   $_widget->getData('style_productdescription_font_family');
+    $_style_productdescription_font_style   =   $_widget->getData('style_productdescription_font_style');
+    $_style_productdescription_font_weight  =   $_widget->getData('style_productdescription_font_weight');
+    $_style_productdescription_font_color   =   $_widget->getData('style_productdescription_font_color');
+?>
+
+
+
+
+<div id="<?php echo $_widget_container_id ?>" style="clear:both" class="ps-container">
+    <script data-type="photoslurp">
+
+        if(!photoSlurpWidgetSettings) {
+            var photoSlurpWidgetSettings = {};
+        }
+
+        (function() {
+            photoSlurpWidgetSettings['<?php echo $_widget_container_id ?>'] = {
+                widgetType:     '<?php echo $_widget_type ?>',
+                albumId:         <?php echo $_album_id ?>,
+                lang:           '<?php echo $_lang ?>',
+                widgetId:       '<?php echo $_widget_id ?>',
+                imageHeight:    '<?php echo $this->__('%spx',$_image_height) ?>',
+                imageWidth:     '<?php echo $this->__('%spx',$_image_width) ?>',
+                showSubmit:      <?php echo $_show_submit ?>,
+                submitText:     '<?php echo $_submit_text  ?>',
+                page_limit:      <?php echo $_page_limit ?>,
+                pageType:       '<?php echo $_page_type ?>',
+                productId:      '<?php echo $_product_id ?>',
+                addPhotosImg:   '<?php echo $_add_photos_img ?>',
+                socialIcons:     <?php echo $_social_icons ?>,
+                noteAddPicsText:'<?php echo $_note_add_pics_text ?>',
+                noteAddPicsIcons: {
+                    facebook: <?php echo $_facebook ?>,
+                    twitter: <?php echo $_twitter ?>,
+                    instagram: <?php echo $_instagram ?>
+                },
+
+
+                style: {
+                    submissionForm: {
+                        colourTop: '<?php echo $_style_submissionform_colourtop  ?>', //Default #4F5F6F
+                        colourButton: '<?php echo $_style_submissionform_colourbutton  ?>', //Default #5DADE2
+                        font: '<?php echo $_style_submissionform_font  ?>'//Default "Open Sans"
+                    },
+                    taggingTitle: {
+                        font: {
+                            family: '<?php echo $_style_taggingtitle_font_family  ?>',
+                            style: '<?php echo $_style_taggingtitle_font_style  ?>',
+                            weight: '<?php echo $_style_taggingtitle_font_weight  ?>',
+                            color: '<?php echo $_style_taggingtitle_font_color  ?>',
+                            size: '<?php echo $_style_taggingtitle_font_size  ?>'
+                        }
+                    },
+                    thumbnail: {
+                        bg: {
+                            color: '<?php echo $_style_thumbnail_bg_color ?>'
+                        },
+                        border: {
+                            color: '<?php echo $_style_thumbnail_border_color ?>'
+                        }
+                    },
+                    carousel: {
+                        bg: {
+                            color: '<?php echo $_style_carousel_bg_color  ?>'
+                        }
+                    },
+                    popup: {
+                        bg: {
+                            color: '<?php echo $_style_popup_bg_color  ?>'
+                        },
+                        title: {
+                            font: {
+                                family: '<?php echo $_style_popup_title_font_family  ?>',
+                                style: '<?php echo $_style_popup_title_font_style  ?>',
+                                weight: '<?php echo $_style_popup_title_font_weight  ?>',
+                                color: '<?php echo $_style_popup_title_font_color  ?>'
+                            }
+                        },
+                        source: {
+                            font: {
+                                family: '<?php echo $_style_source_font_family  ?>',
+                                style: '<?php echo $_style_source_font_style ?>',
+                                weight: '<?php echo $_style_source_font_weight ?>',
+                                color: '<?php echo $_style_source_font_color ?>'
+                            }
+                        },
+                        product_caption_shop: {
+                            font: {
+                                family: '<?php echo $_style_productcaptionshop_font_family  ?>',
+                                style: '<?php echo $_style_productcaptionshop_font_style  ?>',
+                                weight: '<?php echo $_style_productcaptionshop_font_weight  ?>',
+                                color: '<?php echo $_style_productcaptionshop_font_color  ?>'
+                            }
+                        },
+                        product_description: {
+                            font: {
+                                family: '<?php echo $_style_productdescription_font_family ?>',
+                                style: '<?php echo $_style_productdescription_font_style ?>',
+                                weight: '<?php echo $_style_productdescription_font_weight ?>',
+                                color: '<?php echo $_style_productdescription_font_color ?>'
+                            }
+                        }
+                    }
+                }
+            };
+            var script = document.createElement('script');
+            script.async = true;
+            script.src = 'http://www.photoslurp.com/static/widget/v1/widget_loader.js';
+            var entry = document.getElementsByTagName('script')[0];
+            entry.parentNode.insertBefore(script, entry);
+        })();
+
+    </script>
+    <a href="//corp.photoslurp.com" target="_blank" class="ps-poweredby-link">
+        <div class="ps-logo-widget-carousel"></div>
+    </a>
+</div>
+
+<?php endif; ?>
