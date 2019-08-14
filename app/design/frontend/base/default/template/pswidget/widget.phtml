@@ -54,7 +54,7 @@
 	$_page_limit                =   $_widget -> getPageLimit();
     $_page_type                 =   $_page_types[$_widget -> getPageType()]['label'];
 
-    $_add_photos_img            =   $_widget -> getAddPhotosImg();
+    $_add_photos_img            =   $this->getLangValue($_widget->getId(),$_store_id,'add_photos_img');
     $_social_icons              =   $_widget -> getSocialIcons();
 	$_social_count              =   $_widget -> getSocialCount();
 
@@ -82,6 +82,7 @@
 
 	$_additional_params 		=	$_widget -> getAdditionalParams();
 	$_collections               =   $_widget -> getCollections();
+	$_cookie_domain				=	$_widget -> getCookieDomain();
 
 
 //STYLE PARAMETERS
@@ -152,7 +153,7 @@
 				submitText:     '<?php echo addslashes($_submit_text) ?>',
 				shopThisLookText:'<?php echo addslashes($_shop_this_look_text) ?>',
 				autoscrollLimit: <?php echo $_autoscroll_limit ?>,
-				pageLimit:      <?php echo $_page_limit ?>,
+				page_limit:      <?php echo $_page_limit ?>,
 				pageType:       '<?php echo $_page_type ?>',
 				productId:      <?php echo $_product_id_str ?>,
 				addPhotosImg:   '<?php echo $_add_photos_img ?>',
@@ -177,11 +178,12 @@ if ($_init_delay)     			echo $this->__("				initDelay: %s,\n", $_init_delay);
 if ($_cta_button)     			echo $this->__("				ctaButton: '%s',\n", addslashes($_cta_button)) ;
 if ($_analytics_cookie_ttl) 	echo $this->__("				analyticsCookieTTL: %s,\n", $_analytics_cookie_ttl) ;
 if ($_toc_link) 				echo $this->__("				tocLink: '%s',\n", addslashes($_toc_link));
-if ($_submission_form_css_url) 	echo $this->__("				submissionFormCSSURL: '%s',\n", $_submission_form_css_url) ;
+if ($_submission_form_css_url) 	echo $this->__("				submissionformCSSURL: '%s',\n", $_submission_form_css_url) ;
 if ($_visible_products) 		echo $this->__("				visibleProducts: '%s',\n", $_visible_products);
+if ($_cookie_domain) 			echo $this->__("				cookieDomain: '%s',\n", addslashes($_cookie_domain));
 
 $anvanced_enabled = array();
-if($_enable_ga) $anvanced_enabled[] = 'enableGa';
+if($_enable_ga) $anvanced_enabled[] = 'enableGA';
 if($_social_count) $anvanced_enabled[] = 'socialCount';
 if($_thumb_overlay) $anvanced_enabled[] = 'thumbOverlay';
 if($_varying_thumb_sizes) $anvanced_enabled[] = 'varyingThumbSizes';
@@ -267,7 +269,7 @@ foreach ($anvanced_enabled as $item){
             };
 				var script = document.createElement('script');
 				script.async = true;
-				script.src = '//www.photoslurp.com/static/widget/v1/widget_loader.js';
+				script.src = '//www.photoslurp.com/static/widget/v2/widget_loader.js';
 				var entry = document.getElementsByTagName('script')[0];
 				entry.parentNode.insertBefore(script, entry);
         })();

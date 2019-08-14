@@ -34,10 +34,14 @@ document.observe('dom:loaded', function() {
 
     function switchAddPhotosImage (allow_empty){
         if (allow_empty == 1) {
-            $('add_photos_img').up('tr').show()
+            $$('.add_photos_img').each(function(el) {
+                el.up('tr').show();
+            })
         }
         else if (allow_empty == 0) {
-            $('add_photos_img').up('tr').hide()
+            $$('.add_photos_img').each(function(el) {
+                el.up('tr').hide();
+            })
         }
     }
 

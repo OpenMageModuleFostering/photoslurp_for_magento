@@ -109,7 +109,8 @@ class Photoslurp_PsWidget_Adminhtml_Pswidget_PswidgetController extends Mage_Adm
 									'cta_button' => $post_data['cta_button_'.$store->getId()],
 									'load_more_text' => $post_data['load_more_text_'.$store->getId()],
 									'shop_this_look_text' => $post_data['shop_this_look_text_'.$store->getId()],
-									'note_add_pics_text' => $post_data['note_add_pics_text_'.$store->getId()]
+									'note_add_pics_text' => $post_data['note_add_pics_text_'.$store->getId()],
+									'add_photos_img' => $post_data['add_photos_img_'.$store->getId()],
 								)
 							);
 						}

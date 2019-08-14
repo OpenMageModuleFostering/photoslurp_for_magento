@@ -162,7 +162,11 @@ class Photoslurp_PsWidget_Model_Cron{
             $isProductInStore = in_array($store->getId(), $productStores);
             $insertData['title_'.$langcode]         =  $isProductInStore ? sprintf('"%s"', preg_replace($pattern,$replacement,$args['row']['name_'.$store->getId()])) : '';
             $insertData['description_'.$langcode]   =  $isProductInStore ? sprintf('"%s"', preg_replace($pattern,$replacement,$args['row']['description_'.$store->getId()])) : '';
-            $insertData['url_'.$langcode]           =  $isProductInStore ? $store->getBaseUrl() . $args['row']['url_key_'.$store->getId()].$this->_productHelper->getProductUrlSuffix($store->getId()) . '?___store=' . $store->getCode() : '';
+
+            $productUrlSuffix = $this->_productHelper->getProductUrlSuffix($store->getId());
+            if($productUrlSuffix && (strpos($productUrlSuffix, '.') !== 0)) $productUrlSuffix = '.'.$productUrlSuffix;
+
+            $insertData['url_'.$langcode]           =  $isProductInStore ? $store->getBaseUrl() . $args['row']['url_key_'.$store->getId()].$productUrlSuffix . '?___store=' . $store->getCode() : '';
         }
 
         fwrite ($args['fp'], implode($insertData, $this->delimiter) . PHP_EOL);

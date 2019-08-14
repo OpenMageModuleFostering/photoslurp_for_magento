@@ -185,6 +185,11 @@ class Photoslurp_PsWidget_Block_Adminhtml_Pswidget_Edit_Tab_Form3 extends Mage_A
 			'after_element_html' => '<i>Enter the name of one or more collections to filter results by</i>'
 		));
 
+		$fieldset2->addField('cookie_domain', 'text', array(
+			'label' => Mage::helper('pswidget')->__('Cookie Domain'),
+			'name' => 'cookie_domain',
+			'after_element_html' => '<i>If specified all widget cookies will be set on given domain</i>'
+		));
 
 		$fieldset2->addField("additional_params", "textarea", array(
 			"label" => Mage::helper("pswidget")->__("Additional Params"),

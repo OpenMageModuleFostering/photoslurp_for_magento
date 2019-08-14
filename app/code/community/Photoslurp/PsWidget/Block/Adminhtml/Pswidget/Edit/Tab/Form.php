@@ -172,11 +172,32 @@ class Photoslurp_PsWidget_Block_Adminhtml_Pswidget_Edit_Tab_Form extends Mage_Ad
 			$i++;
 		};
 
-        $fieldset->addField("add_photos_img", "text", array(
-            "label" => Mage::helper("pswidget")->__("Add Photos Img"),
-            "name" => "add_photos_img",
-            'after_element_html' => '<i>This requires a URL to an image that will be displayed when there are no images yet in a particular album (for example when the productId parameter is used, and there are no photos for particular product yet). A banner inviting users to submit images is recommended to be used here</i>'
-        ));
+		$i = 0;
+		foreach($stores as $store){
+			if ($i == 0) {
+				$fieldset->addField("add_photos_img_".$store->getId(), "text", array(
+					"label" => Mage::helper("pswidget")->__("Add Photos Img"),
+					"name" => "add_photos_img_".$store->getId(),
+					"class" => "add_photos_img",
+					'after_element_html' => '<br><b>['.$store->getCode().']</b>'
+
+				));
+			} else if ($i == $stores_count - 1) {
+				$fieldset->addField("add_photos_img_".$store->getId(), "text", array(
+					"name" => "add_photos_img_".$store->getId(),
+					"class" => "add_photos_img",
+					'after_element_html' => '<br><b>['.$store->getCode().']</b>'. '<br><i>This requires a URL to an image that will be displayed when there are no images yet in a particular album (for example when the productId parameter is used, and there are no photos for particular product yet). A banner inviting users to submit images is recommended to be used here</i>'
+				));
+			}else{
+				$fieldset->addField("add_photos_img_".$store->getId(), "text", array(
+					"name" => "add_photos_img_".$store->getId(),
+					"class" => "add_photos_img",
+					'after_element_html' => '<br><b>['.$store->getCode().']</b>'
+
+				));
+			}
+			$i++;
+		};
 
 		$i = 0;
 		foreach($stores as $store){
@@ -241,6 +262,7 @@ class Photoslurp_PsWidget_Block_Adminhtml_Pswidget_Edit_Tab_Form extends Mage_Ad
 					$form_data['submit_text_'.$widget_lang_data['id_lang']] = $widget_lang_data['submit_text'];
 					$form_data['shop_this_look_text_'.$widget_lang_data['id_lang']] = $widget_lang_data['shop_this_look_text'];
 					$form_data['note_add_pics_text_'.$widget_lang_data['id_lang']] = $widget_lang_data['note_add_pics_text'];
+					$form_data['add_photos_img_'.$widget_lang_data['id_lang']] = $widget_lang_data['add_photos_img'];
 					$values = array_merge($values, $form_data);
 				}
 			}
