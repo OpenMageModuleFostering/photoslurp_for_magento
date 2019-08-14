@@ -191,6 +191,14 @@ class Photoslurp_PsWidget_Block_Adminhtml_Pswidget_Edit_Tab_Form3 extends Mage_A
 			'after_element_html' => '<i>If specified all widget cookies will be set on given domain</i>'
 		));
 
+		$fieldset2->addField('bundled_jquery', 'select', array(
+			'label' => Mage::helper('pswidget')->__('Bundled jQuery'),
+			'values' => Photoslurp_PsWidget_Block_Adminhtml_Pswidget_Grid::getValueArrayYesNo(),
+			'name' => 'bundled_jquery',
+			"value" => 0,
+			'after_element_html' => '<i>Use the jQuery bundled version of our widget if you are not using jQuery or if we are unable to detect jQuery on your page</i>'
+		));
+
 		$fieldset2->addField("additional_params", "textarea", array(
 			"label" => Mage::helper("pswidget")->__("Additional Params"),
 			"name" => "additional_params"

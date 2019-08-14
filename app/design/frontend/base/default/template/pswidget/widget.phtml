@@ -222,11 +222,12 @@ foreach ($anvanced_enabled as $item){
 							color: '<?php echo $_style_thumbnail_border_color ?>'
 						}
 					},
+					<?php if($_style_carousel_bg_color): ?>
 					carousel: {
 						bg: {
 							color: '<?php echo $_style_carousel_bg_color  ?>'
 						}
-					},
+					},<?php endif; ?>
 					popup: {
 						bg: {
 							color: '<?php echo $_style_popup_bg_color  ?>'
@@ -269,7 +270,7 @@ foreach ($anvanced_enabled as $item){
             };
 				var script = document.createElement('script');
 				script.async = true;
-				script.src = '//www.photoslurp.com/static/widget/v2/widget_loader.js';
+				script.src = '//static.photoslurp.com/widget/v2/<?php echo ($_widget -> getBundledJquery())?'widget_loader_jquery':'widget_loader';?>.js';
 				var entry = document.getElementsByTagName('script')[0];
 				entry.parentNode.insertBefore(script, entry);
         })();
